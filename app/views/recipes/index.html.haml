@@ -1,7 +1,7 @@
-%h1 Listing recipes
+%h1 ズボラ一覧
 
-%table
-  %thead
+%table.table.table-hover
+  %thead.thead-default
     %tr
       %th
       %th
@@ -10,10 +10,8 @@
   %tbody
     - @recipes.each do |recipe|
       %tr
-        %td= link_to 'Show', recipe
-        %td= link_to 'Edit', edit_recipe_path(recipe)
-        %td= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Recipe', new_recipe_path
+        %td= link_to recipe.name, recipe
+        %td= recipe.created_at
+        %td
+          = link_to '編集', edit_recipe_path(recipe)
+          = link_to '削除', @recipe, method: :delete, data: { confirm: "「#{recipe.name}」を削除します。よろしいですか？" }, class: 'btn btn-danger'
