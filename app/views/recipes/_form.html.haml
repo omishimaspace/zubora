@@ -1,10 +1,17 @@
-= form_for @recipe do |f|
-  - if @recipe.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@recipe.errors.count, "error")} prohibited this recipe from being saved:"
-      %ul
-        - @recipe.errors.full_messages.each do |message|
-          %li= message
+- if @recipe.errors.present?
+  %ul#error_explanation
+    - task.errors.full_messages.each do |message|
+      %li= message
 
-  .actions
-    = f.submit 'Save'
+= form_with model: @recipe, local: true do |f|
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control'
+  .form-group
+    = f.label :description
+    = f.text_area :description, row: 5, class: 'form-control'
+  .form-group
+    = f.label :elapsed_minutes
+    = f.text_field :elapsed_minutes, class: 'form-control'
+
+  = f.submit nil, class: 'btn btn-primary'
