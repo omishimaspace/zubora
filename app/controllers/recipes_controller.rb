@@ -16,10 +16,16 @@ class RecipesController < ApplicationController
   end
 
   def edit
+    @recipe.foods.build
+    @recipe.steps.build
+    @recipe.kitchenwares.build
   end
 
   def create
     @recipe = Recipe.new(recipe_params)
+    @recipe.foods.build
+    @recipe.steps.build
+    @recipe.kitchenwares.build
 
     respond_to do |format|
       if @recipe.save
