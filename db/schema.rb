@@ -22,14 +22,14 @@ ActiveRecord::Schema.define(version: 2018_12_01_052311) do
   end
 
   create_table "ingredients", force: :cascade do |t|
-    t.bigint "recipes_id"
-    t.bigint "foods_id"
+    t.bigint "recipe_id"
+    t.bigint "food_id"
     t.integer "amount"
     t.string "unit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["foods_id"], name: "index_ingredients_on_foods_id"
-    t.index ["recipes_id"], name: "index_ingredients_on_recipes_id"
+    t.index ["food_id"], name: "index_ingredients_on_food_id"
+    t.index ["recipe_id"], name: "index_ingredients_on_recipe_id"
   end
 
   create_table "kitchenwares", force: :cascade do |t|
@@ -39,12 +39,12 @@ ActiveRecord::Schema.define(version: 2018_12_01_052311) do
   end
 
   create_table "recipe_kitchenwares", force: :cascade do |t|
-    t.bigint "recipes_id"
-    t.bigint "kitchenwares_id"
+    t.bigint "recipe_id"
+    t.bigint "kitchenware_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["kitchenwares_id"], name: "index_recipe_kitchenwares_on_kitchenwares_id"
-    t.index ["recipes_id"], name: "index_recipe_kitchenwares_on_recipes_id"
+    t.index ["kitchenware_id"], name: "index_recipe_kitchenwares_on_kitchenware_id"
+    t.index ["recipe_id"], name: "index_recipe_kitchenwares_on_recipe_id"
   end
 
   create_table "recipes", force: :cascade do |t|
@@ -57,16 +57,16 @@ ActiveRecord::Schema.define(version: 2018_12_01_052311) do
   end
 
   create_table "steps", force: :cascade do |t|
-    t.bigint "recipes_id"
+    t.bigint "recipe_id"
     t.integer "position"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["recipes_id"], name: "index_steps_on_recipes_id"
+    t.index ["recipe_id"], name: "index_steps_on_recipe_id"
   end
 
-  add_foreign_key "ingredients", "foods", column: "foods_id"
-  add_foreign_key "ingredients", "recipes", column: "recipes_id"
-  add_foreign_key "recipe_kitchenwares", "kitchenwares", column: "kitchenwares_id"
-  add_foreign_key "steps", "recipes", column: "recipes_id"
+  add_foreign_key "ingredients", "foods"
+  add_foreign_key "ingredients", "recipes"
+  add_foreign_key "recipe_kitchenwares", "kitchenwares"
+  add_foreign_key "steps", "recipes"
 end

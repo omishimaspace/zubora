@@ -7,6 +7,43 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 #
 
-Recipe.create()
+# シードネタ
+# 釜玉たらこうどん
+# 所要時間:5分未満
+# レンチンした冷凍うどん1玉に卵黄、たらこパスタソースを1食分の1/3入れ(好みで調節して)あえる。最後にお好みでバターやら小葱やら海苔やら乗せて完。
+# 王道ですが、めちゃくちゃ安上がりだしパスタ茹でる待ち時間があるならうどんチンして即食べる
+#
+# 材料；
+# 冷凍うどん1玉
+# 卵黄
+# たらこパスタソース
+# バター
+# 小葱
+# 海苔
+# 作り方
+# レンチンした冷凍うどん1玉に卵黄、たらこパスタソースを1食分の1/3入れ(好みで調節して)あえる。最後にお好みでバターやら小葱やら海苔やら乗せて完。
 
-Food.create(name: '釜玉たらこうどん')
+recipe = Recipe.create(name: '釜玉たらこうどん')
+
+food1 = Food.create(name: '冷凍うどん玉')
+Ingredient.create(food: food1, recipe: recipe, amount: 1, unit: '玉')
+food2 = Food.create(name: '卵黄')
+Ingredient.create(food: food2, recipe: recipe, amount: 1, unit: '個')
+food3 = Food.create(name: 'たらこパスタソース')
+Ingredient.create(food: food3, recipe: recipe, amount: 1, unit: '適量')
+food4 = Food.create(name: 'バター')
+Ingredient.create(food: food4, recipe: recipe, amount: 1, unit: '適量')
+food5 = Food.create(name: '小葱')
+Ingredient.create(food: food5, recipe: recipe, amount: 1, unit: '適量')
+food6 = Food.create(name: '海苔')
+Ingredient.create(food: food6, recipe: recipe, amount: 1, unit: '適量')
+
+Step.create(recipe: recipe, position: 1, description: 'レンチンする')
+Step.create(recipe: recipe, position: 2, description: '卵黄とたらこパスタソースを入れて和える')
+Step.create(recipe: recipe, position: 3, description: '小ねぎとのりをのせる')
+
+kitchenware = Kitchenware.create(name: '電子レンジ')
+kitchenware2 = Kitchenware.create(name: '耐熱容器')
+RecipeKitchenware.create(kitchenware: kitchenware, recipe: recipe)
+RecipeKitchenware.create(kitchenware: kitchenware2, recipe: recipe)
+
