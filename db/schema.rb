@@ -49,8 +49,8 @@ ActiveRecord::Schema.define(version: 2018_12_01_052311) do
 
   create_table "recipes", force: :cascade do |t|
     t.string "name"
-    t.integer "elapsed_minutes"
-    t.integer "score"
+    t.integer "elapsed_minutes", null: false
+    t.float "score", default: 0.0, null: false
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
