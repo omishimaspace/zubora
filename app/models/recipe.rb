@@ -13,6 +13,7 @@ class Recipe < ApplicationRecord
 
   validates :name, presence: true
   validates :elapsed_minutes, presence: true, numericality: true, inclusion: { in: 0..999 }
+  has_many :photos, as: :photoable, dependent: :destroy
   belongs_to :category
 
   scope :elapsed_minutes, ->(elapsed_minutes) { elapsed_minutes.present? ? where(elapsed_minutes: elapsed_minutes) : Recipe.none }
