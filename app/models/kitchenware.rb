@@ -1,0 +1,2 @@
+class Kitchenware < ApplicationRecord
+end
