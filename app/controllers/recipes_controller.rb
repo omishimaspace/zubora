@@ -25,9 +25,6 @@ class RecipesController < ApplicationController
 
   def create
     @recipe = Recipe.new(recipe_params)
-    @recipe.foods.build
-    @recipe.steps.build
-    @recipe.kitchenwares.build
 
     respond_to do |format|
       if @recipe.save
@@ -67,7 +64,5 @@ class RecipesController < ApplicationController
 
     def recipe_params
       params.require(:recipe).permit(:name, :elapsed_minutes, :description, :score, foods_attributes:[:id, :name], steps_attributes: [:id, :description], kitchenwares_attributes: [:id, :name])
-
-      # params.fetch(:recipe, {})
     end
 end
