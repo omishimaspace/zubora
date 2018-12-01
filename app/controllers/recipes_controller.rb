@@ -10,6 +10,9 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
+    @recipe.foods.build
+    @recipe.steps.build
+    @recipe.kitchenwares.build
   end
 
   def edit
@@ -55,6 +58,8 @@ class RecipesController < ApplicationController
     end
 
     def recipe_params
-      params.fetch(:recipe, {})
+      params.require(:recipe).permit(:name, :elapsed_minutes, :description, :score, foods:[:name], steps: [:description], kitchenwares: [:name])
+
+      # params.fetch(:recipe, {})
     end
 end

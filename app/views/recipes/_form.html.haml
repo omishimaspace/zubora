@@ -1,6 +1,6 @@
 - if @recipe.errors.present?
   %ul#error_explanation
-    - task.errors.full_messages.each do |message|
+    - @recipe.errors.full_messages.each do |message|
       %li= message
 
 = form_with model: @recipe, local: true do |f|
@@ -13,5 +13,18 @@
   .form-group
     = f.label :elapsed_minutes
     = f.text_field :elapsed_minutes, class: 'form-control'
+  %h2 材料
+  = f.fields_for :foods do |food|
+    = food.label :name
+    = food.text_field :name
+  %h2 つくりかた
+  = f.fields_for :steps do |step|
+    = step.label :description
+    = step.text_field :description
+  %h2 必要な道具
+  = f.fields_for :kitchenwares do |kw|
+    = kw.label :name
+    = kw.text_field :name
 
+  %br
   = f.submit nil, class: 'btn btn-primary'
