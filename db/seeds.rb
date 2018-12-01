@@ -23,7 +23,7 @@
 # 作り方
 # レンチンした冷凍うどん1玉に卵黄、たらこパスタソースを1食分の1/3入れ(好みで調節して)あえる。最後にお好みでバターやら小葱やら海苔やら乗せて完。
 
-recipe = Recipe.create(name: '釜玉たらこうどん', elapsed_minutes: 5)
+recipe = Recipe.create(name: '釜玉たらこうどん', elapsed_minutes: 5, category: Category.first)
 
 food1 = Food.create(name: '冷凍うどん玉')
 Ingredient.create(food: food1, recipe: recipe, amount: 1, unit: '玉')
