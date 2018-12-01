@@ -1,5 +1,7 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
+  protect_from_forgery with: :exception
+  skip_before_action :verify_authenticity_token
 
   def index
     @recipes = Recipe.all

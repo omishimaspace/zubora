@@ -1,4 +1,6 @@
 class Recipe < ApplicationRecord
+  extend ActiveHash::Associations::ActiveRecordExtensions
+
   has_many :steps, dependent: :destroy
   has_many :ingredients, dependent: :destroy
   has_many :foods, through: :ingredients
@@ -11,4 +13,7 @@ class Recipe < ApplicationRecord
 
   validates :name, presence: true
   validates :elapsed_minutes, presence: true, numericality: true, inclusion: { in: 0..999 }
+  belongs_to :category
+
+  scope :elapsed_minutes, ->(elapsed_minutes) { elapsed_minutes.present? ? where(elapsed_minutes: elapsed_minutes) : Recipe.none }
 end
