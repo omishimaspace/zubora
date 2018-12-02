@@ -17,6 +17,7 @@ ja:
         id: ID
         name: 名前
         score: スコア
+        original_url: URL
         description: 詳しい説明
         elapsed_minutes: 調理時間
         created_at: 登録日時

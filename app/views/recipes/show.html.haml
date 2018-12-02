@@ -7,6 +7,9 @@
       %th= Recipe.human_attribute_name(:name)
       %td= @recipe.name
     %tr
+      %th= Recipe.human_attribute_name(:original_url)
+      %td= auto_link @recipe.original_url
+    %tr
       %th= Recipe.human_attribute_name(:score)
       %td= @recipe.score
     %tr
