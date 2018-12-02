@@ -29,5 +29,6 @@ module Zubora
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    config.autoload_paths += Dir["#{config.root}/scripts"]
   end
 end

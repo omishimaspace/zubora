@@ -50,6 +50,7 @@ end
 
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'active_hash'
+gem 'hashie'
 gem 'ransack'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
