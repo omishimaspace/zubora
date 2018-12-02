@@ -33,7 +33,7 @@
       %th= Step.model_name.human
       %td
         %ol
-          - @recipe.steps.order(:position) do |step|
+          - @recipe.steps.order(:position).each do |step|
             %li
               .description= step.description
               - step.photos.each do |photo|
