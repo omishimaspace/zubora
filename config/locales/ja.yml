@@ -14,6 +14,7 @@ ja:
       recipe:
         id: ID
         name: 名前
+        original_url: URL
         description: 詳しい説明
         elapsed_minutes: 調理時間
         created_at: 登録日時
