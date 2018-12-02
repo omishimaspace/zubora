@@ -6,9 +6,9 @@ class Api::V1::RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
 
     if @recipe.save
-      render status: 200, json: { status: 200 }
+      render json: { status: 201 }, status: 201
     else
-      render status: 500, json: { status: 500 }
+      render json: { status: 400 }, sttaus: 400
     end
   end
 
