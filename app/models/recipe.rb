@@ -17,4 +17,5 @@ class Recipe < ApplicationRecord
   belongs_to :category
 
   scope :elapsed_minutes, ->(elapsed_minutes) { elapsed_minutes.present? ? where(elapsed_minutes: elapsed_minutes) : Recipe.none }
+  scope :score_order, -> { order(score: :desc) }
 end
