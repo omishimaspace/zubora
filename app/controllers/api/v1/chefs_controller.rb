@@ -6,7 +6,8 @@ class Api::V1::ChefsController < ApplicationController
              category_id_eq: category_id,
              elapsed_minutes_lteq: chef_params[:times]
     }
-    render json: { recipes:  Recipe.ransack(query).result.score_order.limit(3) }
+    # recipes = Recipe.ransack(query).result.score_order.limit(3)
+    render json: Recipe.ransack(query).result.score_order.limit(3), each_serializer: RecipeSerializer
   end
 
 
