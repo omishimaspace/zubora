@@ -24,7 +24,8 @@ class RecipeScoringService
     @recipe = recipe
   end
 
-  def self.call
+  def execute
+    count_strength
   end
 
 

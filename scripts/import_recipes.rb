@@ -7,6 +7,7 @@ exit unless File.exists?(file)
 recipe_data = JSON.parse(File.read(file), { symbolize_names: true })
 
 Recipe.transaction do
+  progressbar = ProgressBar.create(title: 'Data Import', total: recipe_data.size)
   recipe_data.each do |data|
     ingredients = data.delete(:ingredients)
     steps = data.delete(:steps)
@@ -34,5 +35,15 @@ Recipe.transaction do
       step = recipe.steps.create!(description: "#{step_data[:title]} #{step_data[:description]}", position: index + 1)
       step.photos.create!(url: step_data[:image]) if step_data[:image]
     end
+
+    progressbar.increment
+  end
+  
+  scoring_bar = ProgressBar.create(title: 'Recipe Scoring', total: Recipe.count)
+  Recipe.all.each do |recipe|
+    service = RecipeScoringService.new(recipe)
+    recipe.score = service.execute
+    recipe.save
+    scoring_bar.increment
   end
 end

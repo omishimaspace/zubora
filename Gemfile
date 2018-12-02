@@ -53,6 +53,8 @@ gem 'active_hash'
 gem 'hashie'
 gem 'ransack'
 
+gem 'ruby-progressbar'
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'haml-rails'
