@@ -16,4 +16,4 @@
         %td= recipe.created_at
         %td
           = link_to '編集', edit_recipe_path(recipe)
-          = link_to '削除', @recipe, method: :delete, data: { confirm: "「#{recipe.name}」を削除します。よろしいですか？" }, class: 'btn btn-danger'
+          = link_to '削除', recipe, method: :delete, data: { confirm: "「#{recipe.name}」を削除します。よろしいですか？" }, class: 'btn btn-danger'
