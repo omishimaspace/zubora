@@ -1,3 +1,5 @@
+# スクレイピングデータを取り込むスクリプト
+# bundle exec rails r scripts/import_recipes.rb
 Recipe.destroy_all
 
 data = Rails.root.join('scripts/items_saruwaka_10.json')
