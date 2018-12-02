@@ -3,6 +3,9 @@
     - @recipe.errors.full_messages.each do |message|
       %li= message
 
+.nav.justify-content-end
+  = link_to '一覧', recipes_path, class: 'nav-link'
+
 = form_with model: @recipe, local: true do |f|
   .form-group
     = f.label :name
@@ -12,19 +15,22 @@
     = f.text_area :description, row: 5, class: 'form-control'
   .form-group
     = f.label :elapsed_minutes
-    = f.text_field :elapsed_minutes, class: 'form-control'
-  %h2 材料
-  = f.fields_for :foods do |food|
-    = food.label :name
-    = food.text_field :name
-  %h2 つくりかた
-  = f.fields_for :steps do |step|
-    = step.label :description
-    = step.text_field :description
-  %h2 必要な道具
-  = f.fields_for :kitchenwares do |kw|
-    = kw.label :name
-    = kw.text_field :name
+    = f.number_field :elapsed_minutes, class: 'form-control'
+  %h2= Food.model_name.human
+  .form-group
+    = f.fields_for :foods do |food|
+      = food.label :name
+      = food.text_field :name, class: 'form-control'
+  %h2= Step.model_name.human
+  .form-group
+    = f.fields_for :steps do |step|
+      = step.label :description
+      = step.text_field :description, class: 'form-control'
+  %h2= Kitchenware.model_name.human
+  .form-group
+    = f.fields_for :kitchenwares do |kw|
+      = kw.label :name
+      = kw.text_field :name, class: 'form-control'
 
   %br
   = f.submit nil, class: 'btn btn-primary'
