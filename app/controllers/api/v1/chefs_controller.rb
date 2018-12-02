@@ -7,7 +7,7 @@ class Api::V1::ChefsController < ApplicationController
              category_id_eq: category_id,
              elapsed_minutes_lteq: chef_params[:times]
     }
-    results = Recipe.ransack(query).result
+    results = Recipe.ransack(query).result.limit(3)
     render json: { recipes: results }
   end
 
