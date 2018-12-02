@@ -1,14 +1,16 @@
+%h1= @recipe.name
 
-.nav.justify-content-end
-  = link_to '一覧', recipes_path, class: 'nav-link'
+- @recipe.photos.each do |photo|
+  %img{ src: url_for(photo.url), width: "500px" }
+
 %table.table.table-hover
   %tbody
     %tr
-      %th= Recipe.human_attribute_name(:name)
-      %td= @recipe.name
-    %tr
       %th= Recipe.human_attribute_name(:original_url)
       %td= auto_link @recipe.original_url
+    %tr
+      %th= Recipe.human_attribute_name(:category)
+      %td= @recipe.category.name
     %tr
       %th= Recipe.human_attribute_name(:score)
       %td= @recipe.score
@@ -31,8 +33,12 @@
       %th= Step.model_name.human
       %td
         %ol
-          - @recipe.steps.each do |step|
-            %li= step.description
+          - @recipe.steps.order(:position).each do |step|
+            %li
+              .description= step.description
+              - step.photos.each do |photo|
+                %img{ src: url_for(photo.url), width: "200px" }
+
     %tr
       %th= Kitchenware.model_name.human
       %td

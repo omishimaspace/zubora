@@ -11,12 +11,14 @@ ja:
       recipe: レシピ
       food: 材料
       step: 手順
+      category: カテゴリ
       kitchenware: 道具
     attributes:
       recipe:
         id: ID
         name: 名前
         score: スコア
+        category: カテゴリ
         original_url: URL
         description: 詳しい説明
         elapsed_minutes: 調理時間
