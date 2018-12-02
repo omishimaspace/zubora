@@ -2,9 +2,12 @@
 
 = link_to '新規登録', new_recipe_path, class: 'btn btn-primary'
 
+= paginate @recipes
+
 %table.table.table-hover
   %thead.thead-default
     %tr
+      %th
       %th
       %th
       %th
@@ -20,3 +23,5 @@
         %td
           = link_to '編集', edit_recipe_path(recipe)
           = link_to '削除', recipe, method: :delete, data: { confirm: "「#{recipe.name}」を削除します。よろしいですか？" }, class: 'btn btn-danger'
+%hr
+= paginate @recipes
