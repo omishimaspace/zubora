@@ -19,6 +19,9 @@ if File.exist?(data)
         description: hashied_data.description
     }
     recipe.save!
+    unless recipe.photos.exists?
+      recipe.photos.create!(url: hashied_data.main_image) if hashied_data.main_image
+    end
 
     ingredients.each do |ingredient|
       name, amount = ingredient.to_a.flatten
@@ -26,8 +29,9 @@ if File.exist?(data)
       recipe.ingredients.create(food: food, unit: amount, amount: 1)
     end
 
-    steps.each_with_index do |step, index|
-      recipe.steps.create(description: "#{step[:title]} #{step[:description]}", position: index + 1)
+    steps.each_with_index do |step_data, index|
+      step = recipe.steps.create!(description: "#{step_data[:title]} #{step_data[:description]}", position: index + 1)
+      step.photos.create!(url: step_data[:image]) if step_data[:image]
     end
     print '.'
   end
