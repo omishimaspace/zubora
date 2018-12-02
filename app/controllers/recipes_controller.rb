@@ -4,7 +4,7 @@ class RecipesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @recipes = Recipe.all
+    @recipes = Recipe.page(params[:page])
   end
 
   def show
