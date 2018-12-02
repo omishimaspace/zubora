@@ -13,10 +13,10 @@
     - @recipes.each do |recipe|
       %tr
         %td
-          - recipe.photos
+          - if recipe.photos
             %img{ src: url_for(recipe.photos.first.url), width: "200px" }
         %td= link_to recipe.name, recipe
-        %td= recipe.created_at
+        %td= recipe.score
         %td
           = link_to '編集', edit_recipe_path(recipe)
           = link_to '削除', recipe, method: :delete, data: { confirm: "「#{recipe.name}」を削除します。よろしいですか？" }, class: 'btn btn-danger'

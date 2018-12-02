@@ -1,15 +1,10 @@
-
-.nav.justify-content-end
-  = link_to '一覧', recipes_path, class: 'nav-link'
+%h1= @recipe.name
 
 - @recipe.photos.each do |photo|
   %img{ src: url_for(photo.url), width: "500px" }
 
 %table.table.table-hover
   %tbody
-    %tr
-      %th= Recipe.human_attribute_name(:name)
-      %td= @recipe.name
     %tr
       %th= Recipe.human_attribute_name(:original_url)
       %td= auto_link @recipe.original_url
@@ -38,7 +33,7 @@
       %th= Step.model_name.human
       %td
         %ol
-          - @recipe.steps.reverse_each do |step|
+          - @recipe.steps.order(:position) do |step|
             %li
               .description= step.description
               - step.photos.each do |photo|
