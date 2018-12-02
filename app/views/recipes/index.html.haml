@@ -12,6 +12,9 @@
   %tbody
     - @recipes.each do |recipe|
       %tr
+        %td
+          - recipe.photos
+            %img{ src: url_for(recipe.photos.first.url), width: "200px" }
         %td= link_to recipe.name, recipe
         %td= recipe.created_at
         %td

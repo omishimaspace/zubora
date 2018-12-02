@@ -11,6 +11,7 @@ ja:
       recipe: レシピ
       food: 材料
       step: 手順
+      category: カテゴリ
       kitchenware: 道具
     attributes:
       recipe:

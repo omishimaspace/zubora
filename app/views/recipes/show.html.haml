@@ -1,6 +1,10 @@
 
 .nav.justify-content-end
   = link_to '一覧', recipes_path, class: 'nav-link'
+
+- @recipe.photos.each do |photo|
+  %img{ src: url_for(photo.url), width: "500px" }
+
 %table.table.table-hover
   %tbody
     %tr
@@ -34,8 +38,12 @@
       %th= Step.model_name.human
       %td
         %ol
-          - @recipe.steps.each do |step|
-            %li= step.description
+          - @recipe.steps.reverse_each do |step|
+            %li
+              .description= step.description
+              - step.photos.each do |photo|
+                %img{ src: url_for(photo.url), width: "200px" }
+
     %tr
       %th= Kitchenware.model_name.human
       %td
