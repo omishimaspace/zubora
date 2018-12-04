@@ -1,7 +1,8 @@
 %h1= @recipe.name
 
-- @recipe.photos.each do |photo|
-  %img{ src: url_for(photo.url), width: "500px" }
+.images
+  - @recipe.photos.each do |photo|
+    %img{ src: url_for(photo.url), width: "100%" }
 
 %table.table.table-hover
   %tbody
