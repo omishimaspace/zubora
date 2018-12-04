@@ -30,16 +30,17 @@
         %ol
           - @recipe.foods.each do |food|
             %li= food.name
-    %tr
-      %th= Step.model_name.human
-      %td
-        %ol
-          - @recipe.steps.order(:position).each do |step|
-            %li
-              .description= step.description
+    - @recipe.steps.order(:position).each do |step|
+      %tr
+        %td{colspan: 2}
+          %h3
+            %span.badge.badge-warning= step.position
+          .row
+            .col-3
               - step.photos.each do |photo|
-                %img{ src: url_for(photo.url), width: "200px" }
-
+                %img{ src: url_for(photo.url), width: "100%" }
+            .col-9.description= step.description
+          
     %tr
       %th= Kitchenware.model_name.human
       %td
