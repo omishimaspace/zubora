@@ -30,7 +30,7 @@
         %ol
           - @recipe.foods.each do |food|
             %li= food.name
-    - @recipe.steps.order(:position).each do |step|
+    - @recipe.steps.includes(:photos).order(:position).each do |step|
       %tr
         %td{colspan: 2}
           %h3
