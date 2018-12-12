@@ -1,0 +1,27 @@
+%h1 ズボラ一覧
+
+= link_to '新規登録', new_recipe_path, class: 'btn btn-primary'
+
+= paginate @recipes
+
+%table.table.table-hover
+  %thead.thead-default
+    %tr
+      %th
+      %th
+      %th
+      %th
+
+  %tbody
+    - @recipes.each do |recipe|
+      %tr
+        %td
+          - if recipe.photos
+            %img{ src: url_for(recipe.photos.first.url), width: "200px" }
+        %td= link_to recipe.name, recipe
+        %td= recipe.score
+        %td
+          = link_to '編集', edit_recipe_path(recipe)
+          = link_to '削除', recipe, method: :delete, data: { confirm: "「#{recipe.name}」を削除します。よろしいですか？" }, class: 'btn btn-danger'
+%hr
+= paginate @recipes

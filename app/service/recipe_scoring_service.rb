@@ -20,11 +20,14 @@ class RecipeScoringService
     ]
   }.freeze
 
+  MAX_SCORE = 100.0.freeze
+
   def initialize recipe
     @recipe = recipe
   end
 
-  def self.call
+  def execute
+    MAX_SCORE - count_strength
   end
 
 

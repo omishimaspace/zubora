@@ -1,0 +1,49 @@
+%h1= @recipe.name
+
+- @recipe.photos.each do |photo|
+  %img{ src: url_for(photo.url), width: "500px" }
+
+%table.table.table-hover
+  %tbody
+    %tr
+      %th= Recipe.human_attribute_name(:original_url)
+      %td= auto_link @recipe.original_url
+    %tr
+      %th= Recipe.human_attribute_name(:category)
+      %td= @recipe.category.name
+    %tr
+      %th= Recipe.human_attribute_name(:score)
+      %td= @recipe.score
+    %tr
+      %th= Recipe.human_attribute_name(:description)
+      %td= auto_link(simple_format(h(@recipe.description), {}, sanitize: false, wrapper_tag: "div"))
+    %tr
+      %th= Recipe.human_attribute_name(:created_at)
+      %td= @recipe.created_at
+    %tr
+      %th= Recipe.human_attribute_name(:updated_at)
+      %td= @recipe.updated_at
+    %tr
+      %th= Food.model_name.human
+      %td
+        %ol
+          - @recipe.foods.each do |food|
+            %li= food.name
+    %tr
+      %th= Step.model_name.human
+      %td
+        %ol
+          - @recipe.steps.order(:position).each do |step|
+            %li
+              .description= step.description
+              - step.photos.each do |photo|
+                %img{ src: url_for(photo.url), width: "200px" }
+
+    %tr
+      %th= Kitchenware.model_name.human
+      %td
+        %ol
+          - @recipe.kitchenwares.each do |kw|
+            %li= kw.name
+= link_to "編集", edit_recipe_path, class: 'btn btn-primary mr-3'
+= link_to '削除', @recipe, method: :delete, data: { confirm: "「#{@recipe.name}」を削除します。よろしいですか？" }, class: 'btn btn-danger'

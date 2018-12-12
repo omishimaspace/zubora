@@ -1,14 +1,18 @@
 class Api::V1::ChefsController < ApplicationController
   def index
-    pp chef_params
-    Recipe.joins(ingredients: :food).where(feel: 1, elapsed_minutes: 10).where(food: { name: '大根' })
-    render json: {recipes: Recipe.all}
+    category_id = Category.find_by(name: chef_params[:category])&.id
+
+    query = {ingredients_food_name_cont_any: chef_params[:food]&.split(','),
+             category_id_eq: category_id,
+             elapsed_minutes_lteq: chef_params[:times]
+    }
+    render json: Recipe.ransack(query).result.score_order.limit(3)
   end
 
 
   private
 
   def chef_params
-    params.permit(:feel, :food, :times)
+    params.permit(:category, :food, :times)
   end
 end
